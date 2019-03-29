@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block title %}<title>Welcome to Amazona!</title>{% endblock %}
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<style type="text/css">
+		table.table tr td,
+		table.table tr th {
+			border-top: none !important;
+		}
+
+		fieldset.set-border {
+			border: 1px solid #ddd !important;
+			padding: 0px 10px 10px 10px;
+			border-bottom: none;
+		}
+
+		legend.set-border {
+			width: auto !important;
+			border: none;
+		}
+	</style>
+</head>
+<body>
+
+	{% include 'users/parts/header.html' %}
+
+	{% include 'users/parts/display_messages.html' %}
+
+	{% block main_content %}{% endblock %}
+
+
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+
+{% block main_content %}
+
+<h1>User Alias: {{ user.alias }}</h1>
+<p>Name: {{ user.name }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Total Reviews: {{ user.review_set.all | length }}</p>
+
+{% if user.review_set.all %}
+
+<p><strong>Posted Reviews on the following books</strong></p>
+
+<ul>
+	{% for review in user.review_set.all %}
+
+	<li><a href="{% url 'books:show' review.book.id %}">{{ review.book.title }}</a></li>
+
+	{% endfor %}
+</ul>
+
+{% endif %}
+
+{% endblock %}

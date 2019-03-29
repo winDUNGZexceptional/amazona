@@ -1,0 +1,43 @@
+{% extends 'books/base.html' %}
+
+{% block main_content %}
+
+<div class="col-md-6">
+		
+	<h1>{{ book.title }}</h1>
+	<p>Total Ratings: <strong>{{ total_rating }}</strong></p>
+	<p>Author/s: <strong>{{ book.author_set.all | join:", "}}</strong></p>
+
+	<dl>
+		{% for review in reviews %}
+		<hr>
+		<dt>Ratings: {{ review.rating }}</dt>
+		<dd>
+			<a href="{% url 'users:show' review.user.id %}">{{ review.user.name }}</a> says: {{ review.comment|truncatechars:100 }}
+		</dd>
+		<dd>
+			Posted on {{ review.date_created }} {% if request.session.user.id == review.user.id %}<a href="{% url 'books:delete_review' book_id=book.id review_id=review.id %}">Delete this review</a>{% endif %}
+		</dd>
+
+		{% endfor %}
+	</dl>
+</div>	
+
+
+
+<div class="col-md-6">
+	{% if request.session.is_authenticated %}
+	<form action="{% url 'books:add_review' book.id %}" method="POST">
+		{% csrf_token %}
+
+		<table class="table">
+			{{ review_form.as_table }}
+		</table>
+
+		<input type="submit" name="submit" value="Submit Review" class="btn btn-success pull-right">
+
+	</form>
+	{% endif %}
+</div>
+
+{% endblock %}

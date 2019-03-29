@@ -1,0 +1,22 @@
+<header class="container-fluid">
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="{% url 'books:list' %}">
+				Amazona!
+			</a>
+		</div>
+
+		<ul class="navbar-nav nav">
+			<li><a href="{% url 'books:list' %}">Books</a></li>
+		</ul>
+
+		<ul class="navbar-nav nav navbar-right">
+		{% if request.session.is_authenticated %}
+			<li><a href="{% url 'books:add' %}">Add Book and Review</a></li>
+			<li><a href="{% url 'users:logout' %}">Logout</a></li>
+		{% else %}
+			<li><a href="{% url 'users:index' %}">Login</a></li>
+		{% endif %}
+		</ul>
+	</nav>
+</header>

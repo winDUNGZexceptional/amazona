@@ -1,0 +1,61 @@
+{% extends 'books/base.html' %}
+
+{% block title %}
+<title>Books Home</title>
+{% endblock %}
+
+{% block main_content %}
+
+<main class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			{% if request.session.user %}
+			<h1>Welcome, {{ request.session.user.name }}</h1>
+			{% else %}
+			<h1>Welcome to Amazona!</h1>
+			{% endif %}
+
+			{% if books %}
+			<h3>Recent Book Reviews</h3>
+
+			<dl>
+
+				{% for book in books %}
+				<hr>
+				<dt><a href="{% url 'books:show' book.id %}">{{ book.title }}</a></dt>
+				<dd>Ratings: {{ total_rating }}</dd>
+				<dd>
+					<a href="{% url 'users:show' book.review_set.last.user.id %}">{{ book.review_set.last.user.name }}</a> says: {{ book.review_set.last.comment|truncatechars:100 }}
+				</dd>
+				<dd>
+					Posted on {{ book.review_set.last.date_created }}
+				</dd>
+				{% endfor %}
+
+			</dl>
+			{% else %}
+				{% if request.session.user %}
+				<h2>No book listed yet. Please add a new book with its review.</h2>
+				{% else %}
+				<h2>No book listed yet. Please login first to add a new book and its review.</h2>
+				{% endif%}
+			{% endif %}
+		</div>
+
+		<div class="col-md-6">
+			{% if other_books %}
+			<h3>Other books with reviews</h3>
+			<div class="col-md-12">
+				<ul>
+					{% for book in other_books %}
+					<li><a href="{% url 'books:show' book.id %}">{{ book.title }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+		</div>
+
+	</div>
+</main>
+
+{% endblock %}
